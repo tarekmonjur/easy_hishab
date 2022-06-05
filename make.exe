@@ -1,0 +1,4 @@
+.PHONY: artisan
+
+artisan:
+    docker-compose exec easy_hishab_app_1 -c "php artisan $(artisan)"
