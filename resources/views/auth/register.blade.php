@@ -1,9 +1,24 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+<x-app-layout>
+    <x-slot name="header">
+    <div class="container max-auto">
+        <div class="columns-sm">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Members') }}
+            </h2>
+        </div>
+        <div class="columns-sm">
+            <x-link-button :url="route('login')" class="ml-4">
+                {{ __('Add') }}
+            </x-link-button>
+        </div>
+    </div>
+       
+        
+    </x-slot>
+    <x-section-card>
+
+        <x-slot name="title">
+            {{ __('Add Member Form') }}
         </x-slot>
 
         <!-- Validation Errors -->
@@ -15,21 +30,38 @@
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" autofocus />
             </div>
 
-            <!-- Email Address -->
+            <!-- Mobile -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="mobile" :value="__('Mobile')" />
+                <x-input id="mobile" class="block mt-1 w-full" type="number" name="mobile" :value="old('mobile')" required />
+            </div>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <!-- Address -->
+            <div class="mt-4">
+                <x-label for="address" :value="__('Address')" />
+                <x-textarea id="address" class="block mt-1 w-full" name="address" required>
+                    {{ old('address') }}
+                </x-textarea>
+            </div>
+
+             <!-- Type -->
+             <div class="mt-4">
+                <x-label for="type" :value="__('Type')" />
+                <x-select id="type" class="block mt-1 w-full" name="type" :options="config('app.types')" default="internal" />
+            </div>
+
+            <!-- Roles -->
+            <div class="mt-4">
+                <x-label for="role" :value="__('Role')" />
+                <x-select id="role" class="block mt-1 w-full" name="role" :options="config('app.roles')" default="user" />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
-
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
@@ -55,5 +87,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </x-section-card>
+</x-app-layout>
